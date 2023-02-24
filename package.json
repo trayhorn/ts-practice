@@ -1,0 +1,24 @@
+{
+  "name": "ts-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-gallery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trayhorn/ts-practice.git"
+  },
+  "keywords": [],
+  "author": "Ivan_Amoshyi <YOUR_EMAILclear>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trayhorn/ts-practice/issues"
+  },
+  "homepage": "https://github.com/trayhorn/ts-practice#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
