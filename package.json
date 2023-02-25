@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/trayhorn/ts-practice#readme",
   "dependencies": {
+    "basiclightbox": "^5.0.4",
     "lite-server": "^2.6.1"
   }
 }
