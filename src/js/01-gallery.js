@@ -18,18 +18,23 @@ const markUp = (items) => {
   }).join('')
 }
 
+function handleKeyDown(instance, e) {
+  if (e.code === 'Escape') {
+    instance.close();
+  }
+}
+
 const handleClick = e => {
   e.preventDefault();
   if (e.target.className === 'gallery__image') {
     const modal = basicLightbox.create(`
-      <img width="1400" height="900" src="${e.target.dataset.source}">
+      <img
+        class="gallery__image"
+        src="${e.target.dataset.source}"
+      />
     `, {
       onShow: (instance) => {
-        document.addEventListener('keydown', e => {
-          if (e.code === 'Escape') {
-            instance.close();
-          }
-        })
+        document.addEventListener('keydown', (e) => handleKeyDown(instance, e))
       },
     })
     modal.show();
@@ -39,3 +44,4 @@ const handleClick = e => {
 galleryEl.insertAdjacentHTML('beforeend', markUp(galleryItems));
 
 galleryEl.addEventListener('click', handleClick);
+
