@@ -34,8 +34,11 @@ const handleClick = e => {
       />
     `, {
       onShow: (instance) => {
-        document.addEventListener('keydown', (e) => handleKeyDown(instance, e))
+        document.addEventListener('keydown', (e) => handleKeyDown(instance, e));
       },
+      onClose: () => {
+        document.removeEventListener('keydown', () => console.log('removed'));
+      }
     })
     modal.show();
   }
