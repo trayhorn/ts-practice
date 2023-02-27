@@ -1,4 +1,6 @@
-export const galleryItems = [
+import * as basicLightbox from 'basiclightbox';
+
+const galleryItems = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -63,3 +65,62 @@ export const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+interface GalleryImage {
+  preview: string;
+  original: string;
+  description: string;
+}
+
+const galleryEl = document.querySelector('.gallery') as HTMLElement;
+
+const markUp = (items: GalleryImage[]): string => {
+  return items
+    .map(({ preview, original, description }) => {
+      return `<div class="gallery__item">
+        <a class="gallery__link" href="${original}">
+          <img
+            class="gallery__image"
+            src="${preview}"
+            data-source="${original}"
+            alt="${description}"
+          />
+        </a>
+      </div>`;
+    })
+    .join('');
+};
+
+function handleKeyDown(instance: any, e: KeyboardEvent): void {
+  if (e.code === 'Escape') {
+    instance.close();
+  }
+}
+
+const handleClick = (e: MouseEvent): void => {
+  e.preventDefault();
+  console.log(e);
+  if ((e.target as HTMLElement).className === 'gallery__image') {
+    const modal = basicLightbox.create(
+      `
+      <img
+        class="gallery__image"
+        src="${(e.target as HTMLImageElement).dataset.source}"
+      />
+    `,
+      {
+        onShow: (instance): any => {
+          document.addEventListener('keydown', (e) => handleKeyDown(instance, e));
+        },
+        onClose: (): any => {
+          document.removeEventListener('keydown', () => console.log('removed'));
+        },
+      }
+    );
+    modal.show();
+  }
+};
+
+galleryEl.insertAdjacentHTML('beforeend', markUp(galleryItems));
+
+galleryEl.addEventListener('click', handleClick);
